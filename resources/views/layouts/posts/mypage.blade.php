@@ -2,29 +2,69 @@
 
 @section('content')
 
-<div class="container">
-    <h1>マイページ1</h1>
-    @foreach ($posts as $post)
-    <form action="{{route('posts.update', $post->id)}}" method="POST">
-        @csrf
-        @method('PUT')
-  
-    <div class="card">
-        <div class="row">
-            <div class="col-md-12"><a href="{{route('posts.show', $post->id)}}">
-                <p class=title>タイトル</p>
-                <h2>{{$post->title}}</h2>
-                <p class=episode>投稿</p>
-                <h2>{{$post->episode}}</h2>
-                <p class=image>写真</p>
-                <small>投稿者:{{$post->user->name}} 作成日:{{$post->created_at}}</small>
-                </a>
-                </div>
-                </div>
-                </div>
-</form>
+@section('content')
 
-                
-                @endforeach
-                </div>
+<div class="index-content">
+
+<div class="books-list">
+
+<div class="books-list__title mypage-color">
+
+ マイページトップ
+
+</div>
+
+<div class="book-table">
+
+<div class="book-table__profile-list">
+
+<div class="profile-group">
+
+<div class="profile-group__title">ユーザー名</div>
+
+<div class="profile-group__element">{{$auth->name}}</div>
+
+</div>
+
+<div class="profile-group">
+
+<div class="profile-group__title">ユーザーID</div>
+
+<div class="profile-group__element">{{$auth->id}}</div>
+
+</div>
+
+<div class="profile-group">
+
+<div class="profile-group__title">メールアドレス</div>
+
+<div class="profile-group__element">{{$auth->email}}</div>
+
+</div>
+
+<div class="profile-group">
+
+<div class="profile-group__title">登録日時</div>
+
+<div class="profile-group__element">{{$auth->created_at}}</div>
+
+</div>
+
+<div class="profile-group">
+
+<div class="profile-group__title">最終更新日時</div>
+
+<div class="profile-group__element">{{$auth->updated_at}}</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+@endsection
 @endsection

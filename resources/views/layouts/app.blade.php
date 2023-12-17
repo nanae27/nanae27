@@ -39,10 +39,13 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('posts.search') }}">Search</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.create') }}">Newpost</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mypage') }}">Mypage</a>
+                            <a class="nav-link" href="{{ route('posts.mypage') }}">Mypage</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.index') }}">Top</a>

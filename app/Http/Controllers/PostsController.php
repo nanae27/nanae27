@@ -48,10 +48,11 @@ class PostsController extends Controller
         $posts->episode = $request->episode;
         // $posts = $request->file('image')->store('public/image');
         // $post->image = $imagePath;
+        
         $posts->save();
         
         $posts = Post::all(); 
-        return view('layouts/mypage', compact('posts'));
+        return view('layouts/posts/mypage', compact('posts'));
     }
 
     /**

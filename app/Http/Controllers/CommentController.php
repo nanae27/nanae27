@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ReportController extends Controller
+class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        $inputs = request()->validate([
-            'body' => 'required|max:255'
+        $posts = request()->validate([
+            'post_comment' => 'required|max:255'
         ]);
 
         $comment = Comment::create([
-            'body' => $inputs['body'],
+            'post_comment' => $inputs['post_comment'],
             'user_id' => auth()->user()->id,
             'post_id' => $request->post_id
         ]);
 
         return back();
-    } 
+    }
 }

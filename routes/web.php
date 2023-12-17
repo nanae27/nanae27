@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyPageController;
+use App\Http\Controllers\Violate_listController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +26,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts/search', [HomeController::class, 'indexSearch'])->name('posts.search');
 Route::resource('/posts', 'PostsController');
-Route::get('/mypage', [MypageController::class, 'index'])->name('mypage');
-Route::post('/mypage', [MypageController::class, 'indexmypage']);
-Route::post('/posts/comment/store','ReportController@store')->name('comment.store');
-
+Route::get('/posts/mypage', [MypageController::class, 'index'])->name('posts.mypage');
+Route::post('/posts/mypage', [MypageController::class, 'index']);
+// Route::post('/posts/comment/store','ReportController@store')->name('comment.store');
+Route::get('/posts/{post}/violate', [Violate_listController::class, 'violatelist'])->name('posts.violate');
+Route::post('/posts/{post}/violate', [Violate_listController::class, 'violate']);
+Route::get('/posts/comment',[CommentController::class, 'store'])->name('posts.comment');
+Route::post('/posts/comment',[CommentController::class, 'poststore']);

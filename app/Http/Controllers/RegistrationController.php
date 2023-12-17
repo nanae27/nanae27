@@ -10,4 +10,5 @@ class RegistrationController extends Controller
         return view('singnup');
 
     }
+
 }

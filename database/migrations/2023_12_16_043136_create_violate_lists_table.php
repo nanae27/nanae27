@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentListTable extends Migration
+class CreateViolateListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCommentListTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_list', function (Blueprint $table) {
+        Schema::create('violate_lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id');
             $table->string('post_id');
-            $table->string('post_comment');
+            $table->string('title');
+            $table->string('violate_comment');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCommentListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_list');
+        Schema::dropIfExists('violate_lists');
     }
 }

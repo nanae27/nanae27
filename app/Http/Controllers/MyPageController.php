@@ -29,9 +29,9 @@ class MyPageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function indexmypage()
+    public function index()
     {
-        $posts = Post::all();
-        return view('layouts/posts.mypage', ['posts' => $posts]);
+        $Mypage = Mypage::user();
+        return view('posts.index',[ 'Mypage' => $Mypage]);
     }
 }

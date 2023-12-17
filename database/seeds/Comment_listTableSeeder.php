@@ -22,5 +22,6 @@ class Comment_listTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
 
         ]);
+    
     }
 }

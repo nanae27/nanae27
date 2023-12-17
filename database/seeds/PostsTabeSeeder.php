@@ -2,9 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Carbon\Carbon;
-
-class PostsTableSeeder extends Seeder
+class PostsTabeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

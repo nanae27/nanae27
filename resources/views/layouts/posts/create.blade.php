@@ -5,7 +5,7 @@
 <div>
 
 <h1>新規登録</h1>
-  <form action="{{ route('mypage') }}" method="post" enctype="multipart/form-data">
+  <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
   @csrf
  
       <p>タイトル</p>

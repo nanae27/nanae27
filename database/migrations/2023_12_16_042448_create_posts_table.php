@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateViolateListTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateViolateListTable extends Migration
      */
     public function up()
     {
-        Schema::create('violate_list', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id');
-            $table->string('post_id');
-            $table->string('violate_comment');
+            $table->string('title');
+            $table->string('episode');
+            $table->binary('image');
+            $table->tinyInteger('del_flg')->default(0);
             $table->timestamps();
+  
         });
     }
 
@@ -29,6 +32,6 @@ class CreateViolateListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('violate_list');
+        Schema::dropIfExists('posts');
     }
 }

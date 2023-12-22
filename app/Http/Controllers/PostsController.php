@@ -16,7 +16,9 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
+        // dd($posts);
         return view('layouts/posts.index')->with('posts', $posts);
+        
 
     }
 
@@ -42,18 +44,25 @@ class PostsController extends Controller
     // 新規投稿の保存
     public function store(Request $request)
     {
-        $posts = new Post;
-        $posts->user_id = auth()->id();
-        $posts->title = $request->title;
-        $posts->episode = $request->episode;
-        // $posts = $request->file('image')->store('public/image');
-        // $post->image = $imagePath;
-        
-        $posts->save();
-        
-        $posts = Post::all(); 
-        return view('layouts/posts/mypage', compact('posts'));
-    }
+        // dd($request);
+        $post = new Post;
+        $post->user_id = auth()->id();
+        $post->title = $request->title;
+        $post->episode = $request->episode;
+
+        $dir = 'sample';
+
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+
+        // sampleディレクトリに画像を保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name);
+        $post->image = 'storage/' . $dir . '/' . $file_name;
+        $post->save();
+ 
+        return redirect(route('posts.index'));
+        }
+    
 
     /**
      * Display the specified resource.
@@ -65,7 +74,7 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('layouts/posts.show')->with('post', $post);
+        return view('layouts/posts/show')->with('post', $post);
     }
 
     /**

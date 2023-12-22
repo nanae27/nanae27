@@ -5,8 +5,13 @@
     <h2>{{$post->title}}</h2>
     <p>{{$post->episode}}</p>
     <p>写真</p>
+    <img src="{{ asset($post->image) }}" width="100" height="100">
+
     <small>投稿者:{{$post->user->name}} 作成日:{{$post->created_at}}</small>
+    <p>コメント</p>
+    <p>{{$post->post_comment}}</p>
     <hr>
+    
     </div>
 
     <div class="d-flex justify-content-around">
@@ -36,18 +41,24 @@
 </div>
 
 <div class="card mb-4">
-    <form action="{{ route('posts.comment' , $post->id) }}" method="POST">
+
+    <form action="{{ route('posts.storecomment') }}" method="POST">
         @csrf
-        @method('patch')
-        <input type="hidden" name='post_id' value="{{$post->id}}">
+        @method('POST')
+        <input type="hidden" name='post_id' value="{{ isset($post) ? $post->id : '' }}">
         <div class="form-group">
-            <textarea name="body" class="form-control" id="body" cols="30" rows="5" 
-            placeholder="コメントを入力する">{{old('body')}}</textarea>
+            <textarea name="post_comment" class="form-control" id="post_comment" cols="30" rows="5" 
+            placeholder="コメントを入力する">{{old('post_comment')}}</textarea>
         </div>
         <div class="form-group mt-4">
         <button class="btn btn-success float-right mb-3 mr-3">コメントする</button>
         </div>
     </form>
+
 </div>  
+
+
+
+   
 </div>
 @endsection

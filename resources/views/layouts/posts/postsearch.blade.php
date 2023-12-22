@@ -15,6 +15,7 @@
                 <input type="text" name="name" id="name" class="form-control" value="{{ old('posts.search') }}" placeholder="ユーザー名を入力">
             </div>
 
+
             <button type="submit" class="btn btn-primary">検索</button>
         </form>
       
@@ -24,9 +25,7 @@
 
         <p>検索ワード: {{ $searchQuery }}</p>
 
-        @if ($posts->isEmpty())
-            <p>該当する投稿はありません。</p>
-        @else
+        
             <ul>
                 @foreach ($posts as $post)
                     <li>
@@ -36,7 +35,7 @@
                     </li>
                 @endforeach
             </ul>
-        @endif
+      
     </div>
 
        

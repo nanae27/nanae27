@@ -5,6 +5,8 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\Violate_listController;
+use App\Http\Controllers\Comment_listController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +35,5 @@ Route::post('/posts/mypage', [MypageController::class, 'index']);
 // Route::post('/posts/comment/store','ReportController@store')->name('comment.store');
 Route::get('/posts/{post}/violate', [Violate_listController::class, 'violatelist'])->name('posts.violate');
 Route::post('/posts/{post}/violate', [Violate_listController::class, 'violate']);
-Route::get('/posts/comment',[CommentController::class, 'store'])->name('posts.comment');
-Route::post('/posts/comment',[CommentController::class, 'poststore']);
+Route::get('/posts/storecomment',[Comment_listController::class, 'storecomment'])->name('posts.storecomment');
+Route::post('/posts/storecomment',[Comment_listController::class, 'storecomment']);

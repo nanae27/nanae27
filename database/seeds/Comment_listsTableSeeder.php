@@ -2,9 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Carbon\Carbon;
-
-class Comment_listTableSeeder extends Seeder
+class Comment_listsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +11,7 @@ class Comment_listTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('comment_list')->insert([
+        DB::table('comment_lists')->insert([
             'id' => 1,
             'user_id' => 1,
             'post_id' => 1,
@@ -22,6 +20,5 @@ class Comment_listTableSeeder extends Seeder
             'updated_at' => Carbon::now(),
 
         ]);
-    
     }
 }

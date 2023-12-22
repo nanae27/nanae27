@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('user_id');
             $table->string('title');
             $table->string('episode');
-            $table->binary('image');
+            $table->string('image');
             $table->tinyInteger('del_flg')->default(0);
             $table->timestamps();
   

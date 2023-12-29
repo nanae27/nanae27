@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\Useredit;
+
 
 class MyPageController extends Controller
 {
-    // public function Mypageshow()
-    //   {
-    //          $user = Auth::user(); 
-    //          return view('layouts/mypage')->with('users', $users);
-    //  }
-
-
+  
      /**
      * Create a new controller instance.
      *
@@ -21,6 +18,7 @@ class MyPageController extends Controller
      */
     public function __construct()
     {
+        // dd('test');
         $this->middleware('auth');
     }
 
@@ -31,7 +29,9 @@ class MyPageController extends Controller
      */
     public function index()
     {
-        $Mypage = Mypage::user();
-        return view('posts.index',[ 'Mypage' => $Mypage]);
+        
+        $user = auth()->user();
+        $post = Post::where('user_id', $user->id)->get();
+        return view('layouts/mypage',[ 'post' => $post]);
     }
 }

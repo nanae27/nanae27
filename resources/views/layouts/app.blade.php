@@ -45,7 +45,7 @@
                             <a class="nav-link" href="{{ route('posts.create') }}">Newpost</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.mypage') }}">Mypage</a>
+                            <a class="nav-link" href="{{ route('mypage') }}">Mypage</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.index') }}">Top</a>

@@ -8,11 +8,15 @@
         <form action="{{ route('posts.search') }}" method="GET">
             <div class="form-group">
                 <label for="search">検索ワード：</label>
-                <input type="text" name="search" id="search" class="form-control" value="{{ old('posts.search') }}" placeholder="検索ワードを入力">
+                <input type="text" name="search" id="search" class="form-control" value="{{ old('search', $searchQuery) }}" placeholder="検索ワードを入力">
             </div>
             <div class="form-group">
                 <label for="search">ユーザー名：</label>
-                <input type="text" name="name" id="name" class="form-control" value="{{ old('posts.search') }}" placeholder="ユーザー名を入力">
+                <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $name) }}" placeholder="ユーザー名を入力">
+            </div>
+            <div class="form-group">
+                <label for="date">日付：</label>
+                <input type="date" name="date" id="date" class="form-control" value="{{ old('date', $date) }}" placeholder="日付を入力">
             </div>
 
 

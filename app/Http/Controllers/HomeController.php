@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function indexSearch(Request $request)
     {
 
-        $posts = $request->input('posts');
+        $date = $request->input('date');
         $name = $request->input('name');
         $searchQuery = $request->input('search');
 
@@ -42,12 +42,16 @@ class HomeController extends Controller
 
         $posts = Post::where('title', 'like', "%{$searchQuery}%")
         ->orWhere('episode', 'like', "%{$searchQuery}%")
+        ->when($date, function ($query) use ($date) {
+            return $query->whereDate('created_at', '=', $date);
+        })
         ->get();
-        $users = User::where('name', 'like', "%{$searchQuery}%")
-        ->orWhere('name', 'like', "%{$searchQuery}%")
+        $users = User::where(function ($query) use ($name) {
+            $query->where('name', 'like', "%{$name}%");
+        })
         ->get();
 
-        return view('layouts/posts/postsearch', compact('posts', 'users', 'searchQuery'));
+        return view('layouts/posts/postsearch', compact('posts', 'users', 'searchQuery', 'name', 'date'));
     }
 
  

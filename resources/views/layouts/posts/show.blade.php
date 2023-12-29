@@ -8,8 +8,7 @@
     <img src="{{ asset($post->image) }}" width="100" height="100">
 
     <small>投稿者:{{$post->user->name}} 作成日:{{$post->created_at}}</small>
-    <p>コメント</p>
-    <p>{{$post->post_comment}}</p>
+
     <hr>
     
     </div>

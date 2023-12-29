@@ -2,10 +2,12 @@
  
 @section('content')
 <div class="container">
+    
+    <div class="flex-box-wrap">
     @foreach ($posts as $post)
-    <div class="card">
-        <div class="row">
-            <div class="col-md-12"><a href="{{route('posts.show', $post->id)}}">
+    
+        <div class="flex-item-row">
+            <div class="flex-item"><a href="{{route('posts.show', $post->id)}}">
                 <p class=title>タイトル</p>
                 <h2>{{$post->title}}</h2>
                 <p class=episode>投稿</p>
@@ -19,18 +21,39 @@
             コメント{{optional($post->comments)->count()}}件
         </span>
         @else
-        <p>{{$post->post_comment}}</p>
-        <span>コメントはまだありません。</span>
+    
         @endif
 
-    </div>
+               </div>
+              
             </div>
+           
         </div>
+        @endforeach
     </div>
-
-
-
-    @endforeach
+    
 </div>
+
+<!-- <style>
+    .flex-box-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .flex-item-row {
+        display: flex;
+        width: 80%;
+        justify-content: space-between;
+    }
+
+    .flex-item {
+        width: 20%; 
+        padding: 16px;
+        border: 1px solid #ccc; 
+        box-sizing: border-box;
+        margin-bottom: 16px;
+    }
+</style> -->
 @endsection
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\Violate_listController;
 use App\Http\Controllers\Comment_listController;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\UsereditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +30,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts/search', [HomeController::class, 'indexSearch'])->name('posts.search');
 Route::resource('/posts', 'PostsController');
-Route::get('/posts/mypage', [MypageController::class, 'index'])->name('posts.mypage');
-Route::post('/posts/mypage', [MypageController::class, 'index']);
-// Route::post('/posts/comment/store','ReportController@store')->name('comment.store');
+Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage');
+Route::post('/mypage', [MyPageController::class, 'index']);
 Route::get('/posts/{post}/violate', [Violate_listController::class, 'violatelist'])->name('posts.violate');
 Route::post('/posts/{post}/violate', [Violate_listController::class, 'violate']);
 Route::get('/posts/storecomment',[Comment_listController::class, 'storecomment'])->name('posts.storecomment');
 Route::post('/posts/storecomment',[Comment_listController::class, 'storecomment']);
+Route::get('/useredit',[UsereditController::class, 'UserEdit'])->name('useredit');
+Route::post('/useredit',[UsereditController::class, 'UserEdit']);
+

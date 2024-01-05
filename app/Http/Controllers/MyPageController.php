@@ -32,6 +32,6 @@ class MyPageController extends Controller
         
         $user = auth()->user();
         $post = Post::where('user_id', $user->id)->get();
-        return view('layouts/mypage',[ 'post' => $post]);
+        return view('layouts/mypage',[ 'post' => $post, 'user' => $user]);
     }
 }

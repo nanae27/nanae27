@@ -21,7 +21,13 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <style>
+    .navbar-nav .nav-link:hover {
+        color: #fff; /* Change the text color on hover to your preferred color */
+        background-color: #00FFFF; /* Change the background color on hover to your preferred color */
+    }
+</style>
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #e3f2fd;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'ATT掲示板') }}
@@ -37,7 +43,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.search') }}">Search</a>
                         </li>

@@ -7,6 +7,8 @@ use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\Violate_listController;
 use App\Http\Controllers\Comment_listController;
 use App\Http\Controllers\UsereditController;
+use App\Http\Controllers\UserdeleteController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,4 +40,8 @@ Route::get('/posts/storecomment',[Comment_listController::class, 'storecomment']
 Route::post('/posts/storecomment',[Comment_listController::class, 'storecomment']);
 Route::get('/useredit',[UsereditController::class, 'UserEdit'])->name('useredit');
 Route::post('/useredit',[UsereditController::class, 'UserEdit']);
+Route::patch('/useredit/{id}',[UsereditController::class, 'UserUpdate'])->name('userupdate');
+
+Route::get('/userdelete',[UserdeleteController::class, 'UserDelete'])->name('userdelete');
+Route::post('/userdelete',[UserdeleteController::class, 'UserDelete']);
 

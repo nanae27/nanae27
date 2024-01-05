@@ -6,7 +6,9 @@
 
 <p>アイコン画像</p>
 <p>ユーザー名</p> 
+<p>[{{$user->name}}]</p>
 <p>プロフィール</p>
+<p>{{$user->profile}}</p>
 <a href="{{ route('useredit') }}" class="btn btn-primary">ユーザー情報編集</a>
 
     <div class="flex-box-wrap">

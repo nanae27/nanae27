@@ -38,18 +38,14 @@ class HomeController extends Controller
         $name = $request->input('name');
         $searchQuery = $request->input('search');
 
-       
-
-        $posts = Post::where('title', 'like', "%{$searchQuery}%")
-        ->orWhere('episode', 'like', "%{$searchQuery}%")
-        ->when($date, function ($query) use ($date) {
+        $posts = Post::where(function ($query) use ($searchQuery) {
+            $query->where('title', 'like', "%{$searchQuery}%")
+                ->orWhere('episode', 'like', "%{$searchQuery}%");
+        })->when($date, function ($query) use ($date) {
             return $query->whereDate('created_at', '=', $date);
-        })
-        ->get();
-        $users = User::where(function ($query) use ($name) {
-            $query->where('name', 'like', "%{$name}%");
-        })
-        ->get();
+        })->get();
+
+        $users = User::where('name', 'like', "%{$name}%")->get();
 
         return view('layouts/posts/postsearch', compact('posts', 'users', 'searchQuery', 'name', 'date'));
     }

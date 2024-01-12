@@ -2,16 +2,17 @@
  
 @section('content')
 <div class="container">
-<h1>マイページ</h1>
+<h1 class="mypage mb-5">マイページ</h1>
 
-<p>アイコン画像</p>
 <p>ユーザー名</p> 
 <p>[{{$user->name}}]</p>
+<p>メールアドレス</p> 
+<p>[{{$user->email}}]</p>
 <p>プロフィール</p>
-<p>{{$user->profile}}</p>
-<a href="{{ route('useredit') }}" class="btn btn-primary">ユーザー情報編集</a>
+<p>[{{$user->profile}}]</p>
+<a href="{{ route('useredit') }}" class="btn btn-outline-primary">ユーザー情報編集</a>
 
-    <div class="flex-box-wrap">
+    <div class="flex-box-wrap mt-5">
     @foreach($post->chunk(2) as $post)
     <div class="flex-item-row">
     @foreach($post as $post)

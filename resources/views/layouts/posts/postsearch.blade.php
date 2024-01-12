@@ -4,7 +4,6 @@
 
 <div class="container">
         <h1>投稿検索</h1>
-
         <form action="{{ route('posts.search') }}" method="GET">
             <div class="form-group">
                 <label for="search">検索ワード：</label>
@@ -18,18 +17,13 @@
                 <label for="date">日付：</label>
                 <input type="date" name="date" id="date" class="form-control" value="{{ old('date', $date) }}" placeholder="日付を入力">
             </div>
-
-
-            <button type="submit" class="btn btn-primary">検索</button>
+            <button type="submit" class="btn btn-outline-info">検索</button>
         </form>
       
-
         <div class="container">
-        <h1>検索結果</h1>
+        <h1 class="word mt-5">検索結果</h1>
 
         <p>検索ワード: {{ $searchQuery }}</p>
-
-        
             <ul>
                 @foreach ($posts as $post)
                     <li>
@@ -40,9 +34,6 @@
                 @endforeach
             </ul>
       
-    </div>
-
-       
-
+      </div>
     </div>
 @endsection

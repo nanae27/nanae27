@@ -8,37 +8,48 @@
     <img src="{{ asset($post->image) }}" width="100" height="100">
 
     <small>投稿者:{{$post->user->name}} 作成日:{{$post->created_at}}</small>
-
+   
+    @if(isset($postComments) && count($postComments) > 0)
+    <div class="card-body">
+        @foreach($postComments as $comment)
+            <p>[{{ $comment->post_comment }}]</p>
+        @endforeach
+    </div>
+@endif
     <hr>
     
     </div>
-
-    <div class="d-flex justify-content-around">
-
+    
+    <div class="posts d-flex justify-content-around">
+    <div class="button d-flex justify-content-around">
     <form action="{{ route('posts.edit', $post->id) }}" method="post">
        @csrf
        @method('patch')
-         <div class="btn-group mt-3">
+         <div class="button mt-3">
         <input type="hidden" name="id" value="{{ $post->id }}"/>
           @if (!Auth::guest() && Auth::user()->id ==$post->user_id)
-         <a href="{{route('posts.edit' , $post->id)}}" class="btn btn-primary">編集</a>
+         <a href="{{route('posts.edit' , $post->id)}}" class="btn btn-outline-primary mr-3">編集</a>
             @endif
     </form>
-    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" >
-                              @csrf
-                              @method('DELETE')
-                              <input type="hidden" name="id" value="{{ $post->id }}"/>
-                              <input type="submit" value="削除" class="btn btn-danger" onclick='return confirm("削除しますか？");'>
-                              </form>
-
+    </div>
+    <div class="button mt-3">
+    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="id" value="{{ $post->id }}"/>
+            <input type="submit" value="削除" class="btn btn-outline-danger mr-3" onclick='return confirm("削除しますか？");'>
+            </form>
+            </div>
+            <div class="button mt-3">
     
-         <a href="{{route('posts.violate' , $post->id)}}" class="btn btn-primary">違反報告</a>
-
-    <input type="reset" value="戻る" class="btn btn-secondary" onclick='window.history.back(-1);'>
+         <a href="{{route('posts.violate' , $post->id)}}" class="btn btn-outline-success mr-3">違反報告</a>
+         </div>
+         <div class="button mt-3">
+    <input type="reset" value="戻る" class="btn btn-outline-secondary mr-3" onclick='window.history.back(-1);'>
     
-
+    
 </div>
-
+</div>
 <div class="card mb-4">
 
     <form action="{{ route('posts.storecomment') }}" method="POST">
@@ -53,11 +64,6 @@
         <button class="btn btn-success float-right mb-3 mr-3">コメントする</button>
         </div>
     </form>
-
 </div>  
-
-
-
-   
 </div>
 @endsection

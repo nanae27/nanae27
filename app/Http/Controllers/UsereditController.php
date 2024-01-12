@@ -23,29 +23,20 @@ class UsereditController extends Controller
     {
  
         $user = User::find($id);
-        if(!$user){
-            abort(404);
+        if (auth()->user()->id !== $user->id) {
+            return redirect(route('mypage'))->with('error', '許可されていない操作です');
         }
-
-        // $form = $request->all();
-        $user->fill($request->except('_token'))->save();
-        return redirect()->route('layouts/mypage')->with('success', 'User updated successfully');
-
-        // unset($form['_token']);
-        // $auth->fill($form)->save();
-        // return redirect('layouts/mypage');
+ 
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        // $user->password = $request->input('password');
+        $user->profile = $request->input('profile');
+        $user->save();
+ 
+        return redirect(route('mypage'))->with('success', 'ブログ記事を更新しました');
     }
 }
-        // $user->name = $request->input('name');
-        // $user->email = $request->input('email');
-        // $user->profile = $request->input('profile');
-        // if ($request->filled('password')) {
-        // $user->password = bcrypt($request->input('password'));
-        //         }
 
-        // $user->save();
-        
-        // return redirect()->route('layouts/mypage', ['id' => $user->id])->with('user', $user);
  
     
 

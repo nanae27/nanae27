@@ -8,6 +8,7 @@ use App\Http\Controllers\Violate_listController;
 use App\Http\Controllers\Comment_listController;
 use App\Http\Controllers\UsereditController;
 use App\Http\Controllers\UserdeleteController;
+use App\Http\Controllers\OwnerpageController;
 
 
 /*
@@ -36,12 +37,18 @@ Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage');
 Route::post('/mypage', [MyPageController::class, 'index']);
 Route::get('/posts/{post}/violate', [Violate_listController::class, 'violatelist'])->name('posts.violate');
 Route::post('/posts/{post}/violate', [Violate_listController::class, 'violate']);
-Route::get('/posts/storecomment',[Comment_listController::class, 'storecomment'])->name('posts.storecomment');
-Route::post('/posts/storecomment',[Comment_listController::class, 'storecomment']);
+Route::get('/storecomment',[Comment_listController::class, 'storecomment'])->name('posts.storecomment');
+Route::post('/storecomment',[Comment_listController::class, 'storecomment']);
 Route::get('/useredit',[UsereditController::class, 'UserEdit'])->name('useredit');
-Route::post('/useredit',[UsereditController::class, 'UserEdit']);
 Route::patch('/useredit/{id}',[UsereditController::class, 'UserUpdate'])->name('userupdate');
+Route::delete('/userdelete/{id}',[UserdeleteController::class, 'UserDelete'])->name('userdelete');
+Route::get('/userdelete/{id}',[UserdeleteController::class, 'UserDeleteform'])->name('userdelete');
+Route::get('/ownerpage', [OwnerpageController::class, 'index'])->name('ownerpage');
+Route::post('/ownerpage', [OwnerpageController::class, 'index']);
+Route::get('/postlist', [OwnerpageController::class, 'postList'])->name('postlist');
+Route::post('/postlist', [OwnerpageController::class, 'postList']);
+Route::get('/userlist', [OwnerpageController::class, 'userList'])->name('userlist');
+Route::post('/userlist', [OwnerpageController::class, 'userList']);
 
-Route::get('/userdelete',[UserdeleteController::class, 'UserDelete'])->name('userdelete');
-Route::post('/userdelete',[UserdeleteController::class, 'UserDelete']);
+
 

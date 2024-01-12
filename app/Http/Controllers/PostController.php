@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Post;
-use App\Comment_list;
 
-
-class PostsController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +15,8 @@ class PostsController extends Controller
     // TOPページ表示
     public function index()
     {
-        $posts = Post::all();
-        // dd($posts);
-        return view('layouts/posts.index')->with('posts', $posts);
-        
+        $post = Post::all();
+        return view('layouts/post.index')->with('post', $post);
 
     }
 
@@ -33,8 +28,8 @@ class PostsController extends Controller
     // 新規投稿作成画面
     public function create()
     {
-        $posts = Post::all();
-        return view('layouts/posts.create')->with('posts', $posts);
+        $post = Post::all();
+        return view('layouts/post.create')->with('post', $post);
         
     }
 
@@ -47,25 +42,17 @@ class PostsController extends Controller
     // 新規投稿の保存
     public function store(Request $request)
     {
-        // dd($request);
         $post = new Post;
         $post->user_id = auth()->id();
         $post->title = $request->title;
         $post->episode = $request->episode;
-
-        $dir = 'sample';
-
-        // アップロードされたファイル名を取得
-        $file_name = $request->file('image')->getClientOriginalName();
-
-        // sampleディレクトリに画像を保存
-        $request->file('image')->storeAs('public/' . $dir, $file_name);
-        $post->image = 'storage/' . $dir . '/' . $file_name;
+        // $post = $request->file('image')->store('public/image');
+        // $post->image = $imagePath;
         $post->save();
- 
-        return redirect(route('posts.index'));
-        }
-    
+        
+        $post = Post::all(); 
+        return view('layouts/mypage', compact('post'));
+    }
 
     /**
      * Display the specified resource.
@@ -74,17 +61,10 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     // 個別の投稿ページの表示
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $post = Post::find($id);
-
-        $comment = new Comment_list();
-        $comment->post_comment = $request->post_comment;
-        $comment->post_id = $request->post_id;
-        $comment->user_id = Auth::user()->id;
-        $postComments = $post->comments;
-        
-        return view('layouts/posts/show')->with('post', $post)->with('postComments', $postComments);
+        return view('layouts/post.show')->with('post', $post);
     }
 
     /**
@@ -99,9 +79,9 @@ class PostsController extends Controller
         $post = Post::find($id);
  
         if (auth()->user()->id != $post->user_id) {
-            return redirect(route('posts.index'))->with('error', '許可されていない操作です');
+            return redirect(route('post.index'))->with('error', '許可されていない操作です');
         }
-        return view('layouts/posts.edit')->with('post', $post);
+        return view('layouts/post.edit')->with('post', $post);
     }
 
     /**
@@ -121,14 +101,14 @@ class PostsController extends Controller
  
         $post = Post::find($id);
         if (auth()->user()->id != $post->user_id) {
-            return redirect(route('posts.index'))->with('error', '許可されていない操作です');
+            return redirect(route('post.index'))->with('error', '許可されていない操作です');
         }
  
         $post->title = $request->input('title');
         $post->episode = $request->input('episode');
         $post->save();
  
-        return redirect(route('posts.index'))->with('success', 'ブログ記事を更新しました');
+        return redirect(route('post.index'))->with('success', 'ブログ記事を更新しました');
     }
 
     /**
@@ -142,10 +122,10 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         if (auth()->user()->id != $post->user_id) {
-            return redirect(route('posts.index'))->with('error', '許可されていない操作です');
+            return redirect(route('post.index'))->with('error', '許可されていない操作です');
         }
  
         $post->delete();
-        return redirect(route('posts.index'))->with('success', '投稿記事を削除しました');
+        return redirect(route('post.index'))->with('success', '投稿記事を削除しました');
     }
 }

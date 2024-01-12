@@ -45,6 +45,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('ownerpage') }}">Owner</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.search') }}">Search</a>
                         </li>
                         <li class="nav-item">

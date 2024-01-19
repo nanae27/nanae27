@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'サンプル',
             'email' => 'sample@gmail.com',
             'email_verified_at' => Carbon::now(),
-            'profile' => 'さんぷる',
+            'user_image' => 'さんぷる',
             'password' => Hash::make("my-special-secret"),
             'remember_token' => '',
             'created_at' => Carbon::now(),

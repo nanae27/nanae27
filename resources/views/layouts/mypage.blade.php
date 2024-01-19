@@ -8,8 +8,8 @@
 <p>[{{$user->name}}]</p>
 <p>メールアドレス</p> 
 <p>[{{$user->email}}]</p>
-<p>プロフィール</p>
-<p>[{{$user->profile}}]</p>
+<p>ユーザーアイコン</p>
+<p><img src="{{ asset($user->user_image) }}" width="100" height="100"></p>
 <a href="{{ route('useredit') }}" class="btn btn-outline-primary">ユーザー情報編集</a>
 
     <div class="flex-box-wrap mt-5">
@@ -47,6 +47,14 @@
         box-sizing: border-box;
         margin-bottom: 16px;
     }
+    
+    h1 {
+  color: #010079;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
 </style>
 
 

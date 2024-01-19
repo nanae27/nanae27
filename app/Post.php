@@ -26,4 +26,10 @@ class Post extends Model
         return $this->hasMany(Comment_list::class);
     }
 
+    public function violate_lists()
+    {
+    
+        return $this->hasMany(Violate_list::class, 'post_id');
+    }
+
 }

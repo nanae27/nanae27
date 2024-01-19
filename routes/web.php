@@ -35,8 +35,8 @@ Route::get('/posts/search', [HomeController::class, 'indexSearch'])->name('posts
 Route::resource('/posts', 'PostsController');
 Route::get('/mypage', [MyPageController::class, 'index'])->name('mypage');
 Route::post('/mypage', [MyPageController::class, 'index']);
-Route::get('/posts/{post}/violate', [Violate_listController::class, 'violatelist'])->name('posts.violate');
-Route::post('/posts/{post}/violate', [Violate_listController::class, 'violate']);
+Route::get('/violate/{postId}', [Violate_listController::class, 'create'])->name('violations.create');
+Route::post('/violate/{postId}', [Violate_listController::class, 'store'])->name('violations.store');
 Route::get('/storecomment',[Comment_listController::class, 'storecomment'])->name('posts.storecomment');
 Route::post('/storecomment',[Comment_listController::class, 'storecomment']);
 Route::get('/useredit',[UsereditController::class, 'UserEdit'])->name('useredit');
@@ -49,6 +49,10 @@ Route::get('/postlist', [OwnerpageController::class, 'postList'])->name('postlis
 Route::post('/postlist', [OwnerpageController::class, 'postList']);
 Route::get('/userlist', [OwnerpageController::class, 'userList'])->name('userlist');
 Route::post('/userlist', [OwnerpageController::class, 'userList']);
+
+Route::get('register', [RegisterController::class, 'create'])
+    ->middleware('admin')
+    ->name('register');
 
 
 

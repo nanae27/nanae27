@@ -19,10 +19,10 @@ class Comment_list extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
     public function comments()
     {
-        return $this->belongsTo('App\Models\Comment_list');
+        return $this->hasMany(Comment_list::class);
     }
 }

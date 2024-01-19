@@ -42,17 +42,15 @@
             </div>
             <div class="button mt-3">
     
-         <a href="{{route('posts.violate' , $post->id)}}" class="btn btn-outline-success mr-3">違反報告</a>
+         <a href="{{route('violations.store' , $post->id)}}" class="btn btn-outline-success mr-3">違反報告</a>
          </div>
          <div class="button mt-3">
-    <input type="reset" value="戻る" class="btn btn-outline-secondary mr-3" onclick='window.history.back(-1);'>
-    
-    
-</div>
-</div>
-<div class="card mb-4">
+              <input type="reset" value="戻る" class="btn btn-outline-secondary mr-3" onclick='window.history.back(-1);'>
+          </div>
+       </div>
+        <div class="card mb-4">
 
-    <form action="{{ route('posts.storecomment') }}" method="POST">
+         <form action="{{ route('posts.storecomment') }}" method="POST">
         @csrf
         @method('POST')
         <input type="hidden" name='post_id' value="{{ isset($post) ? $post->id : '' }}">

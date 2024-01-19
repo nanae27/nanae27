@@ -8,7 +8,7 @@
   <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
   @csrf
  
-      <p>タイトル</p>
+      <p class="post-title mt-5">タイトル</p>
       <input type="text" name="title" /><br /><br />
 
       <p>画像</p>
@@ -21,5 +21,14 @@
       <input type="submit" class="btn btn-outline-success" value="投稿する"/>
     
    </form>
+   <style>
+h1 {
+  color: #010079;
+  text-shadow: 0 0 5px white;
+  border-left: solid 7px #010079;
+  background: -webkit-repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+  background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
+}
+</style>
 </div>
 @endsection

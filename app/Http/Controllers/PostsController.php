@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Comment_list;
+use App\User;
 
 
 class PostsController extends Controller
@@ -18,11 +19,9 @@ class PostsController extends Controller
     // TOPページ表示
     public function index()
     {
-        $posts = Post::all();
-        // dd($posts);
-        return view('layouts/posts.index')->with('posts', $posts);
         
-
+        $posts = Post::all();
+        return view('layouts/posts.index')->with('posts', $posts);
     }
 
     /**

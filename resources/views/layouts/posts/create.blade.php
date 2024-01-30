@@ -5,18 +5,27 @@
 <div class="container">
 
 <h1>新規登録</h1>
+@if ($errors->any())
+<div class="alert alert-danger">
+   <ul>
+         @foreach ($errors->all() as $error)
+         <li>{{ $error }}</li>
+         @endforeach
+    </ul>
+ </div>
+@endif
   <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
   @csrf
  
       <p class="post-title mt-5">タイトル</p>
-      <input type="text" name="title" /><br /><br />
+      <input type="text" name="title" value="{{ old('title') }}" /><br /><br />
 
       <p>画像</p>
      
       <input type="file" id="imageInput" name="image" accept="image/*" /><br />
 
       <p>文章</p>
-      <textarea name="episode"></textarea><br />
+      <textarea name="episode">{{ old('episode') }}</textarea><br />
       <br />
       <input type="submit" class="btn btn-outline-success" value="投稿する"/>
     

@@ -5,6 +5,15 @@
 <div class="container">
 
 <h1>違反報告</h1>
+@if ($errors->any())
+<div class="alert alert-danger">
+<ul>
+  @foreach ($errors->all() as $error)
+  <li>{{ $error }}</li>
+  @endforeach
+  </ul>
+  </div>
+@endif
   <form action="{{ route('violations.store', ['postId' => $postId]) }}" method="post">
   @csrf
   <input type="hidden" name="post_id" value="{{ $postId }}">

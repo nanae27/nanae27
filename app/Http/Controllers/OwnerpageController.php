@@ -44,41 +44,46 @@ class OwnerpageController extends Controller
     public function userList(Request $request)
     {
         $searchQuery = $request->input('search'); 
-        $users = User::with(['comments','posts' => function($query){
+        $sortOrder = $request->input('sort', 'asc');
+        $usersQuery = User::with(['comments','posts' => function($query){
             $query->where('del_flg', '<>', 1);
-        }])
-        ->when($searchQuery, function ($query) use ($searchQuery) {
-                $query->where('name', 'like', '%' . $searchQuery . '%')
-        ->orWhereHas('comments', function ($commentQuery) use ($searchQuery) {
-                $commentQuery->where('email', 'like', '%' . $searchQuery . '%');
-            });
-        })
-        
-       ->get();
-       User::where('del_flg', 0)->update(['del_flg' => 1]);
-       $users = $users->each(function ($user) {
+        }]);
+        if ($searchQuery) {
+            $usersQuery->where('name', 'like', '%' . $searchQuery . '%')
+                       ->orWhereHas('comments', function ($commentQuery) use ($searchQuery) {
+                            $commentQuery->where('email', 'like', '%' . $searchQuery . '%');
+                        });
+        }
     
-       $hiddenPostCount = Post::where('user_id', $user->id)->where('del_flg', 1)->count();
+        $users = $usersQuery->withCount('posts')
+        ->orderBy('posts_count', $sortOrder)
+        ->get();
     
-  
-       $user->hiddenPostCount = $hiddenPostCount;
-       });
+   
        return view('layouts/userlist')->with('users', $users)->with('searchQuery', $searchQuery);
-    }}
-        // ->withCount([
-        //     'posts AS del_flg' => function ($query) {
-        //         foreach ($users as $user) 
-        //         User::where('del_flg', 0)->update(['del_flg' => 1]);
-        //         $query->select(DB::raw("SUM(del_flg) as del_flg_sum"));
-             
-             
+    
+    }
+       public function posthidden(Request $request)
+       {
+           Post::where('id', $request['id'])->where('del_flg', 0)->update(['del_flg' => 1]);
+           $user = User::where('id', $request['user_id'])->get();
+           $user[0] -> displaystop ++;
+           $user[0] -> save();
 
-        //         $hiddenPostCount = Post::where('user_id', $user->id)->where('del_flg', 1)->count();
+        return view('layouts/ownerpage');
+
+       }
+
+       public function showuserList()
+       {
+           $users = User::with(['comments','posts' => function($query){
+               $query->where('del_flg', '<>', 1);
+           }])
+           ->get();
+           $searchQuery = null;
+          return view('layouts/userlist')->with('users', $users)->with('searchQuery', $searchQuery);
+       }
+    }  
+
+
     
-        //         $user->hiddenPostCount = $hiddenPostCount;
-    
-        //     }        // 非表示投稿の件数で降順にソート
-    
-        //     // $users = $users->sortByDesc('hiddenPostCount');
-        //   ])->orderBy('del_flg', 'desc')
-        //   ->get();

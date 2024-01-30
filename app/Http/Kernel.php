@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        
     ];
 
     /**
@@ -41,6 +42,11 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'admin' => [
+        
+            \App\Http\Middleware\AdminAllowMiddleware\AdminAllowMiddleware::class,
+        ],
     ];
 
     /**
@@ -62,7 +68,12 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminAllowMiddleware::class,
+        
     ];
+
+    
+  
+    
 
     /**
      * The priority-sorted list of middleware.
@@ -80,4 +91,7 @@ class Kernel extends HttpKernel
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
     ];
+
+    
+
 }

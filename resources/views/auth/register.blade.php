@@ -39,20 +39,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="user_icon" class="col-md-4 col-form-label text-md-right">{{ __('User Icon') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="user_icon" type="file" class="form-control @error('user_icon') is-invalid @enderror" name="user_icon" accept="image/*">
-
-                                @error('user_icon')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>

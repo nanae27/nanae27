@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
 <h1 class="mypage mb-5">マイページ</h1>
-
+@isset($user)
 <p>ユーザー名</p> 
 <p>[{{$user->name}}]</p>
 <p>メールアドレス</p> 
 <p>[{{$user->email}}]</p>
-<p>ユーザーアイコン</p>
-<p><img src="{{ asset($user->user_image) }}" width="100" height="100"></p>
+
+@endisset
 <a href="{{ route('useredit') }}" class="btn btn-outline-primary">ユーザー情報編集</a>
 
     <div class="flex-box-wrap mt-5">

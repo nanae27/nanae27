@@ -16,8 +16,8 @@
             <div class="col">
             <label for="sort" class="post-word mt-4">表示停止件数の並び替え：</label>
             <select name="sort" id="sort" class="form-control">
-                <option value="asc" {{ request('sort') === 'asc' ? 'selected' : '' }}>昇順</option>
-                <option value="desc" {{ request('sort') === 'desc' ? 'selected' : '' }}>降順</option>
+                <option value="asc" {{ request('sort') === 'asc' ? 'selected' : '' }}>少ない</option>
+                <option value="desc" {{ request('sort') === 'desc' ? 'selected' : '' }}>多い</option>
             </select>
         </div>
         <div class="col">
@@ -45,7 +45,7 @@
         <th scope="row">{{ $loop->iteration }}</th>
         <td>{{$user->name}}</td>
         <td>{{$user->email}}</td>
-        <td>{{$user->hiddenPostCount}}</td>
+        <td>{{$user->displaystop}}</td>
         <td><a href="{{route('mypage', $user->id)}}">ユーザーページへ</a></td>
     </tr>
 @endforeach
@@ -61,26 +61,6 @@ h1 {
   background: repeating-linear-gradient(-45deg, #cce7ff, #cce7ff 3px,#e9f4ff 3px, #e9f4ff 7px);
 }
 </style>
-<script>
-function updateDelFlg(userId) {
-        // Send an AJAX request to update del_flg
-        $.ajax({
-            method: 'POST',
-            url: '/update-del-flg/' + userId,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Include CSRF token if needed
-            },
-            success: function(response) {
-                console.log(response.message);
-                // You can update the UI as needed
-            },
-            error: function(error) {
-                console.error('Failed to update del_flg');
-            }
-        });
-    }
-    </script>
-
 <div class="button mt-3">
               <input type="reset" value="戻る" class="btn btn-outline-secondary mr-3" onclick='window.history.back(-1);'>
           </div>

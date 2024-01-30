@@ -42,13 +42,15 @@
   <tbody>
   @foreach($posts as $post)
     <tr>
-      <th scope="row">{{ $loop->iteration }}</th>
-      <td>{{ $post->violate_lists->count() }}</td>
-      <td>{{$post->user->name}}</td>
-      <td>{{$post->episode}}</td>
-      <td>{{$post->created_at}}</td>
-      <td><a href="{{route('posts.show', $post->id)}}">投稿詳細へ</a></td>
-      <td><a href="{{ route('userlist') }}" class="btn btn-outline-danger">表示停止</a></td>
+      @if($post -> del_flg == 0)
+        <th scope="row">{{ $loop->iteration }}</th>
+        <td>{{ $post->violate_lists->count() }}</td>
+        <td>{{$post->user->name}}</td>
+        <td>{{$post->episode}}</td>
+        <td>{{$post->created_at}}</td>
+        <td><a href="{{route('posts.show', $post->id)}}">投稿詳細へ</a></td>
+        <td><a href="{{ route('posthidden', ['id' => $post -> id, 'user_id' => $post -> user_id ]) }}" class="btn btn-outline-danger">表示停止</a></td>
+      @endif
     </tr>
     @endforeach
     </tbody>

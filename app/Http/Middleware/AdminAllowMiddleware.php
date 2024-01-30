@@ -3,8 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 class AdminAllowMiddleware
 {
     /**
@@ -21,5 +20,8 @@ class AdminAllowMiddleware
         }
     
         return redirect()->route('home');
+
+
+   
     }
 }

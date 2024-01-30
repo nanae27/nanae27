@@ -11,6 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/infinite-scroll.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Infinite Scroll library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.infinitescroll/3.0.6/jquery.infinitescroll.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -44,7 +49,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav">
-                      
+   
+                        
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -56,27 +62,9 @@
                                 </li>
                             @endif
                         @else
-                        @if (Auth::user()->role == "admin")
-                    <li class="nav-item">
-                            <a class="nav-link" href="{{ route('ownerpage') }}">Owner</a>
-                        </li>
-                        @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.search') }}">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.create') }}">Newpost</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mypage') }}">Mypage</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('posts.index') }}">Top</a>
-                        </li>
-                        @endif
-                        <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -86,7 +74,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>

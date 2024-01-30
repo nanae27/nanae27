@@ -19,9 +19,22 @@ class PostsController extends Controller
     // TOPページ表示
     public function index()
     {
-        
-        $posts = Post::all();
+        $query = Post::orderBy('created_at', 'desc');
+        // $posts = Post::all();
+
+        $posts = $query->take(5)->get();
         return view('layouts/posts.index')->with('posts', $posts);
+    }
+
+    public function ajaxscroll(Request $request)
+
+    {
+
+        $count = $request->count;
+        // dd($count);
+        $posts = Post::with('user')->skip($count)->take(5)->orderBy('created_at', 'desc')->get();
+        return response()->json($posts);
+
     }
 
     /**
@@ -46,7 +59,20 @@ class PostsController extends Controller
     // 新規投稿の保存
     public function store(Request $request)
     {
-        // dd($request);
+        $rules = [
+            'title' => 'required|string|max:255',
+            'episode' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Optional image upload, if provided
+        ];
+        $messages = [
+            'title.required' => 'タイトルは必須です。',
+            'title.max' => 'タイトルは255文字以内で入力してください。',
+            'episode.required' => '文章は必須です。',
+            'image.image' => '画像は画像ファイルである必要があります。',
+            'image.mimes' => '画像はjpeg, png, jpg, gif形式のいずれかである必要があります。',
+            'image.max' => '画像サイズは2MB以内である必要があります。',        ];
+        $request->validate($rules, $messages);
+
         $post = new Post;
         $post->user_id = auth()->id();
         $post->title = $request->title;
@@ -113,10 +139,17 @@ class PostsController extends Controller
     // 投稿の更新の保存
     public function update(Request $request, $id)
     {
+
+        $messages = [
+            'title.required' => 'タイトルは必須項目です。',
+            'title.max' => 'タイトルは255文字以内で入力してください。',
+            'episode.required' => '本文は必須項目です。',
+                ];
         $request->validate([
             'title' => 'required|max:255',
             'episode' => 'required'
-        ]);
+        ],
+        $messages);
  
         $post = Post::find($id);
         if (auth()->user()->id != $post->user_id) {

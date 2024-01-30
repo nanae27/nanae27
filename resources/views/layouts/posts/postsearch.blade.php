@@ -25,7 +25,7 @@
     <div class="container">
         <h1 class="word mt-5">検索結果</h1>
 
-        <!-- Display Post Search Results -->
+        
         <h3 class="word mt-5">[投稿検索結果]</h2>
         <ul>
             @foreach ($posts as $post)
@@ -36,7 +36,7 @@
             @endforeach
         </ul>
 
-        <!-- Display User Search Results -->
+     
         <h3 class="word mt-5">[ユーザー検索結果]</h2>
         <ul>
             @foreach ($users as $user)

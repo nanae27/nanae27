@@ -20,7 +20,6 @@ class PostsController extends Controller
     public function index()
     {
         $query = Post::orderBy('created_at', 'desc');
-        // $posts = Post::all();
 
         $posts = $query->take(5)->get();
         return view('layouts/posts.index')->with('posts', $posts);
@@ -31,7 +30,6 @@ class PostsController extends Controller
     {
 
         $count = $request->count;
-        // dd($count);
         $posts = Post::with('user')->skip($count)->take(5)->orderBy('created_at', 'desc')->get();
         return response()->json($posts);
 

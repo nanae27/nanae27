@@ -27,7 +27,8 @@ use App\Http\Controllers\LoginController;
 
 
 
-Auth::routes();    
+Auth::routes(); 
+   
 Route::group(['middleware' => 'auth'], function(){
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
@@ -45,10 +46,6 @@ Route::delete('/userdelete/{id}',[UserdeleteController::class, 'UserDelete'])->n
 Route::get('/userdelete/{id}',[UserdeleteController::class, 'UserDeleteform'])->name('userdelete');
 // 無限スクロール
 Route::post('ajax/scroll', 'PostsController@ajaxscroll')->name('posts.ajaxscroll');
-// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-
-
-
 
 Route::get('/ownerpage', [OwnerpageController::class, 'index'])->name('ownerpage');
 Route::post('/ownerpage', [OwnerpageController::class, 'index']);

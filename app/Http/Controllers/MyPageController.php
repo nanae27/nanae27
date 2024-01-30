@@ -18,7 +18,6 @@ class MyPageController extends Controller
      */
     public function __construct()
     {
-        // dd('test');
         $this->middleware('auth');
     }
 

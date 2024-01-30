@@ -87,10 +87,7 @@ function ajax_add_content() {
         data:{ count : count }
     }).done(function(data){
       console.log(data);
-        //コンテンツ生成
-        // $.each(data,function(key, val){
-        //     add_content += "<div>"+val.content+"</div>";
-        // })
+
         for (var i=0; i<data.length; i++) {
           $("#content").append(`<tr class="count">
       <th scope="row">${data[i]["id"]}</th>
